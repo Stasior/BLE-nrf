@@ -4,9 +4,9 @@ namespace Jenx.Bluetooth.UartOverGatt.Client
 {
     public class GattIdentifiers
     {
-        public static Guid UartGattServiceId = Guid.Parse("0000FFF0-0000-1000-8000-00805f9b34fb");
-        public static Guid UartGattCharacteristicReceiveId = Guid.Parse("0000FFF1-0000-1000-8000-00805f9b34fb");
-        public static Guid UartGattCharacteristicSendId = Guid.Parse("0000FFF2-0000-1000-8000-00805f9b34fb");
+        public static Guid UartGattServiceId = Guid.Parse("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
+        public static Guid UartGattCharacteristicReceiveId = Guid.Parse("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
+        public static Guid UartGattCharacteristicSendId = Guid.Parse("6E400002-B5A3-F393-E0A9-E50E24DCCA9E");
         public static Guid SpecialNotificationDescriptorId = Guid.Parse("00002902-0000-1000-8000-00805f9b34fb");
     }
 }

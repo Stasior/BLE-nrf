@@ -4,6 +4,7 @@ using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinEssentials = Xamarin.Essentials;
+using System.Diagnostics;
 
 namespace Jenx.Bluetooth.UartOverGatt.Client
 {
@@ -27,18 +28,20 @@ namespace Jenx.Bluetooth.UartOverGatt.Client
             try
             {
                 var service = await _connectedDevice.GetServiceAsync(GattIdentifiers.UartGattServiceId);
-
+                
                 if (service != null)
                 {
+                    Output.Text += "Service." + Environment.NewLine;
                     sendCharacteristic = await service.GetCharacteristicAsync(GattIdentifiers.UartGattCharacteristicSendId);
 
                     receiveCharacteristic = await service.GetCharacteristicAsync(GattIdentifiers.UartGattCharacteristicReceiveId);
                     if (receiveCharacteristic != null)
                     {
                         var descriptors = await receiveCharacteristic.GetDescriptorsAsync();
-
+                        Output.Text += "descriptors." + Environment.NewLine;
                         receiveCharacteristic.ValueUpdated += (o, args) =>
                         {
+                            Output.Text += "receiveCharacteristic." + Environment.NewLine;
                             var receivedBytes = args.Characteristic.Value;
                             XamarinEssentials.MainThread.BeginInvokeOnMainThread(() =>
                             {
@@ -55,8 +58,9 @@ namespace Jenx.Bluetooth.UartOverGatt.Client
                     Output.Text += "UART GATT service not found." + Environment.NewLine;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.WriteLine(ex);
                 Output.Text += "Error initializing UART GATT service." + Environment.NewLine;
             }
         }
